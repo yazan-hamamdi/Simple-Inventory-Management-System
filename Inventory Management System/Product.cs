@@ -38,26 +38,27 @@ namespace Inventory_Management_System
         }
 
         //*Add a product:* Prompt the user for the product name, price, and quantity, then add the product to the inventory
-        public Product AddProduct(string name, double price, double quantity)
+        public static Product AddProduct(string name, double price, double quantity)
         {
             Product p = new Product(name, price, quantity);
             return p;
         }
 
         //*View all products:* Display a list of all products in the inventory
-        public void DisplayProducts(List<Product> L)
+        public static void DisplayProducts(List<Product> L)
         {
             foreach (var pro in L)
             {
+                Console.WriteLine("+++++++++++++++++++++");
                 Console.WriteLine($"name is: {pro.name}");
                 Console.WriteLine($"price is: {pro.price}");
-                Console.WriteLine($"name is: {pro.quantity}");
+                Console.WriteLine($"quantity is: {pro.quantity}");
                 Console.WriteLine("+++++++++++++++++++++");
             }
         }
 
         //Edit a product:* Ask the user for a product name. If the product is in the inventory, allow the user to update its name, price, or quantity.
-        public void EditProducts(List<Product> L, string name)
+        public static void EditProducts(List<Product> L, string name)
         {
             foreach (var pro in L)
             {
@@ -67,29 +68,38 @@ namespace Inventory_Management_System
             }
         }
         //Delete a product:* Ask the user for a product name. If the product is in the inventory, remove it. Commit and push.
-        public void DeleteProducts(List<Product> L, string name)
+        public static void DeleteProducts(List<Product> L, string name)
         {
-            foreach (var pro in L)
-            {
-                if (pro.name == name)
-                    L.Remove(pro);
-            }
+           
+            
+                for (int i = 0; i < L.Count; i++)
+                {
+                    if (L[i].name == name)
+                    {
+                        L.RemoveAt(i);
+                        break; 
+                    }
+                }
+            
         }
 
         //Search for a product:* Ask the user for a product name. If the product is in the inventory, display its name, price, and quantity. If not, let the user know the product was not found
-        public void SearchProducts(List<Product> L, string name)
+        public static void SearchProducts(List<Product> L, string name)
         {
+            int count = 0;
             foreach (var pro in L)
             {
                 if (pro.name == name)
                 {
+                    Console.WriteLine("that is your search: ");
                     Console.WriteLine($"name is: {pro.name}");
                     Console.WriteLine($"price is: {pro.price}");
                     Console.WriteLine($"name is: {pro.quantity}");
-                }
-                else
-                    Console.WriteLine("the product was not found");
-            }
+                    count++;
+                }   
+          }
+            if (count == 0)
+                Console.WriteLine("the product was not found");
         }
         // *Exit:* Close the application
         public bool Close()
