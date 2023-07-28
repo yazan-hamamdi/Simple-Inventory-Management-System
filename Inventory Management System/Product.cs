@@ -17,22 +17,22 @@ namespace Inventory_Management_System
             this._price = price;
             this._quantity = quantity;
         }
-
+        private double check(double val) => val <= 0 ? 0 : val;
         public string name
         {
-            set { this._name = value;}
+            set { this._name =value;}
 
             get{ return this._name;}
         }
         public double price
         {
-            set { this._price =value; }
+            set { this._price =check(value); }
 
             get { return this._price; }
         }
         public double quantity
         {
-            set { this._quantity = value; }
+            set { this._quantity = check(value); }
 
             get { return this._quantity; }
         }
@@ -42,6 +42,18 @@ namespace Inventory_Management_System
         {
           Product p=new Product(name, price, quantity);
             return p;
-        } 
+        }
+
+        //*View all products:* Display a list of all products in the inventory
+        public void DisplayProducts(List<Product>L)
+        {
+            foreach (var pro in L)
+            {
+                Console.WriteLine($"name is: {pro.name}");
+                Console.WriteLine($"price is: {pro.price}");
+                Console.WriteLine($"name is: {pro.quantity}");
+                Console.WriteLine("+++++++++++++++++++++");
+            }
+        }
     }
 }
